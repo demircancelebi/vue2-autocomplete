@@ -106,6 +106,12 @@
         required: true
       },
 
+      // allow editing the method
+      method: {
+        type: String,
+        default: 'GET'
+      },
+
       // query param
       param: {
         type: String,
@@ -355,7 +361,15 @@
         let params = this.composeParams(val)
         // Init Ajax
         let ajax = new XMLHttpRequest();
-        ajax.open('GET', `${this.url}?${params}`, true);
+        
+        let url;
+        if (this.url.indexOf('?') > -1) {
+          url = `${this.url}&${params}`;
+        } else {
+          url = `${this.url}?${params}`;
+        }
+        
+        ajax.open(this.method, url, true);
         this.composeHeader(ajax)
         // Callback Event
         ajax.addEventListener('progress', (data) => {
