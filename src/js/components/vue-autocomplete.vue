@@ -338,7 +338,7 @@
       composeParams(val) {
         const encode = (val) => this.encodeParams ? encodeURIComponent(val) : val
         let params = `${this.param}=${encode(val)}`
-        if(this.customParams) {
+        if(this.customParams && this.method === 'GET') {
           Object.keys(this.customParams).forEach((key) => {
             params += `&${key}=${encode(this.customParams[key])}`
           })
@@ -385,7 +385,7 @@
         });
         // Send Ajax
         if (this.method === 'POST') {
-          ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          ajax.setRequestHeader('Content-type', 'application/json');
           ajax.send(this.customParams);
         } else {
           ajax.send();

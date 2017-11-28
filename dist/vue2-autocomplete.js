@@ -484,7 +484,7 @@ if (false) {(function () {
         return _this3.encodeParams ? encodeURIComponent(val) : val;
       };
       var params = this.param + '=' + encode(val);
-      if (this.customParams) {
+      if (this.customParams && this.method === 'GET') {
         Object.keys(this.customParams).forEach(function (key) {
           params += '&' + key + '=' + encode(_this3.customParams[key]);
         });
@@ -534,7 +534,7 @@ if (false) {(function () {
       });
       // Send Ajax
       if (this.method === 'POST') {
-        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.setRequestHeader('Content-type', 'application/json');
         ajax.send(this.customParams);
       } else {
         ajax.send();
