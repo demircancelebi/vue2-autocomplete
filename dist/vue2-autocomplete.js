@@ -533,7 +533,12 @@ if (false) {(function () {
         _this5.json = _this5.process ? _this5.process(json) : json;
       });
       // Send Ajax
-      ajax.send();
+      if (this.method === 'POST') {
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.send(this.customParams);
+      } else {
+        ajax.send();
+      }
     },
     getData: function getData(value) {
       if (value.length < this.min || !this.url) return;

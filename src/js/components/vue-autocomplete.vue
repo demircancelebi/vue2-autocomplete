@@ -361,14 +361,14 @@
         let params = this.composeParams(val)
         // Init Ajax
         let ajax = new XMLHttpRequest();
-        
+
         let url;
         if (this.url.indexOf('?') > -1) {
           url = `${this.url}&${params}`;
         } else {
           url = `${this.url}?${params}`;
         }
-        
+
         ajax.open(this.method, url, true);
         this.composeHeader(ajax)
         // Callback Event
@@ -384,7 +384,12 @@
           this.json = this.process ? this.process(json) : json;
         });
         // Send Ajax
-        ajax.send();
+        if (this.method === 'POST') {
+          ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          ajax.send(this.customParams);
+        } else {
+          ajax.send();
+        }
       },
 
       getData(value){
