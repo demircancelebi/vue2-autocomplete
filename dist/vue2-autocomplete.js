@@ -544,7 +544,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       // Send Ajax
       if (this.method === 'POST') {
         ajax.setRequestHeader('Content-type', 'application/json');
-        ajax.send(JSON.parse(JSON.stringify(this.customParams)));
+        ajax.send(JSON.stringify(this.customParams));
       } else {
         ajax.send();
       }
