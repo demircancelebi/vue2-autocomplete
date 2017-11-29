@@ -139,6 +139,8 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -277,6 +279,9 @@ if (false) {(function () {
       type: Number,
       default: 0
     },
+
+    // process url
+    processUrl: Function,
 
     // Create a custom template from data.
     onShouldRenderChild: Function,
@@ -515,6 +520,10 @@ if (false) {(function () {
         url = this.url + '&' + params;
       } else {
         url = this.url + '?' + params;
+      }
+
+      if (_typeof(this.processUrl) !== undefined) {
+        url = this.processUrl(url);
       }
 
       ajax.open(this.method, url, true);

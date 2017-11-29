@@ -135,6 +135,9 @@
         default: 0
       },
 
+      // process url
+      processUrl: Function,
+
       // Create a custom template from data.
       onShouldRenderChild: Function,
 
@@ -367,6 +370,10 @@
           url = `${this.url}&${params}`;
         } else {
           url = `${this.url}?${params}`;
+        }
+
+        if (typeof this.processUrl !== undefined) {
+          url = this.processUrl(url);
         }
 
         ajax.open(this.method, url, true);
