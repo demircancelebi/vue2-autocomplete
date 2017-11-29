@@ -393,7 +393,7 @@
         // Send Ajax
         if (this.method === 'POST') {
           ajax.setRequestHeader('Content-type', 'application/json');
-          ajax.send(this.customParams);
+          ajax.send(JSON.parse(JSON.stringify(this.customParams)));
         } else {
           ajax.send();
         }
